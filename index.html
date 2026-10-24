@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAP!</title>
+
+    <!-- 📱 Progressive Web App Fullscreen Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Civil Rep">
+    <meta name="theme-color" content="#f7fafc">
+
+    <!-- 🎨 Your Custom Favicon & App Icon Configuration -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="./manifest.json">
+
+    <title>Zap-1823!</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #f7fafc;
+            color: #2d3748;
+        }
+        nav {
+            padding: 12px;
+            background-color: #edf2f7;
+            margin-bottom: 30px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        nav a, nav strong {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #2b6cb0;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #4a5568;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: white;
+        }
+        select:focus {
+            border-color: #e53e3e;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #c53030;
+        }
+        #status {
+            margin-top: 20px;
+            font-style: italic;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ZAP 1823!</h1>
+    <h4>Safer streets, one data point at a time</h4>
+    
+     <!-- Explanation container card - Data-focused & professional -->
+    <div style="background-color: #ebf8ff; border-left: 4px solid #3182ce; padding: 15px; margin: 20px auto 30px auto; text-align: left; border-radius: 0 6px 6px 0;">
+        <p style="margin: 0; font-size: 15px; color: #2b6cb0; line-height: 1.6;">
+            <strong>ZAP 1823!</strong> is a crowdsourcing tool mapping systemic pedestrian hazards across Hong Kong. Your location and timestamp data are compiled in an email to 1823; simply choose a category (optional), press the button, then send the email. 
+        </p>
+    
+        
+    </div>
+
+
+        <!-- Updated Selection Dropdown with explicit placeholder -->
+    <div class="input-group">
+        <label for="violationType">Type of Hazard (optional):</label>
+                <select id="violationType">
+            <!-- Universal Placeholder -->
+            <option value="General Public Amenity Issue">Select report type...</option>
+            
+            <!-- Smoking & Health Hazards -->
+            <option value="Illegal Indoor / Non-Smoking Area Smoking">Illegal Smoking</option>
+            
+            <!-- Sidewalk & Infrastructure Defects -->
+            <option value="Construction illegally impeding pedestrian passage">Construction obstruction</option>
+             <option value="Illegal or dangerous scaffolding">Illegal scaffolding</option>
+            
+            <!-- Environmental Hygiene & Cleanliness -->
+            <option value="Water Dripping from Building Air Conditioning Unit">AC Water Dripping</option>
+    
+            <option value="Accumulated Litter / Garbage Blackspot">Garbage Blackspot</option>
+            <option value="Dumping of Construction Waste / Mud Obstruction">Dumping of Construction Waste</option>
+            
+            <!-- General Catch-All -->
+            <option value="Other Systemic Public Space / Safety Hazard">Other Public Space Hazard</option>
+        </select>
+
+    </div>
+
+
+   <!-- The Trigger Button -->
+    <button id="reportBtn" onclick="generateReport()">
+        ⚡ ZAP 1823
+    </button>
+
+    <!-- NEW: Post-Action Privacy Anchor -->
+    <p style="margin-top: 15px; font-size: 13px; color: #718096; font-weight: 500; text-align: center;">
+        🛡️ Privacy Guarantee: a completely static tool with no tracking or analytics.
+    </p>
+
+    <!-- Status message area -->
+    <p id="status"></p>
+
+
+    <script>
+    function generateReport() {
+    const statusText = document.getElementById("status");
+    statusText.innerText = "Fetching your location...";
+
+    if (!navigator.geolocation) {
+        statusText.innerText = "Geolocation is not supported by your browser.";
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            try {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                statusText.innerText = "Location acquired! Opening email...";
+
+                const currentDateTime = new Date().toLocaleString(); 
+                const selectedViolation = document.getElementById("violationType").value;
+
+                // 🛑 Test Email Address 
+                const emailTo = "james.ockenden@gmail.com"; 
+                
+                // Old Subject line format:
+// const subjectText = "Dangerous parking at " + currentDateTime;
+
+// Optimized Government-Indexed Subject Line
+const subjectText = "[1823 Public Report] " + selectedViolation + " - " + currentDateTime;
+
+
+                const subject = encodeURIComponent(subjectText);
+                
+                let bodyText = "Dear 1823 Team,\n\n";
+bodyText += "Please log the following public space safety hazard for investigation and remedial action:\n\n";
+bodyText += "📋 Incident Category: " + selectedViolation + "\n";
+bodyText += "📅 Logged Timestamp: " + currentDateTime + "\n\n";
+bodyText += "🌐 GPS Latitude: " + lat + "\n";
+bodyText += "🌐 GPS Longitude: " + lon + "\n\n";
+bodyText += "Please transfer this data package to the appropriate enforcement or municipal maintenance department for action under their respective statutory ordinance.";
+
+
+                const emailBody = encodeURIComponent(bodyText);
+
+                // This launches the mail application
+                window.location.href = "mailto:" + emailTo + "?subject=" + subject + "&body=" + emailBody;
+
+                // NEW: A 3-second timer subroutine that runs in the background.
+                // It resets the text right after the mail client opens, so when they bounce back, the screen is clean!
+                setTimeout(function() {
+                    statusText.innerText = ""; // Wipes the text completely blank
+                }, 3000); // 3000 milliseconds = 3 seconds
+            } 
+            catch (error) {
+                statusText.innerText = "Error building email layout: " + error.message;
+            }
+        }, 
+        function(error) {
+            statusText.innerText = "Unable to retrieve your location. Error code: " + error.code;
+        }
+    );
+}
+
+    </script>
+
+</body>
+</html>
