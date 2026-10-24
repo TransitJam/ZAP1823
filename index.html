@@ -105,7 +105,8 @@
      <!-- Explanation container card - Data-focused & professional -->
     <div style="background-color: #ebf8ff; border-left: 4px solid #3182ce; padding: 15px; margin: 20px auto 30px auto; text-align: left; border-radius: 0 6px 6px 0;">
         <p style="margin: 0; font-size: 15px; color: #2b6cb0; line-height: 1.6;">
-            <strong>ZAP 1823!</strong> is a crowdsourcing tool mapping systemic pedestrian hazards across Hong Kong. Your location and timestamp data are compiled in an email to 1823; simply choose a category (optional), press the button, then send the email. 
+            "Streets and their sidewalks, the main public places of a city, are its most vital organs. Think of a city and what comes to mind? Its streets. If a city's streets look interesting, the city looks interesting; if they look dull, the city looks dull. If they look dangerous, they are dangerous."
+— Jane Jacobs, The Death and Life of Great American Cities
         </p>
     
         
@@ -173,8 +174,9 @@
                 const currentDateTime = new Date().toLocaleString(); 
                 const selectedViolation = document.getElementById("violationType").value;
 
-                // 🛑 Test Email Address 
-                const emailTo = "james.ockenden@gmail.com"; 
+                // 🛑 Live Email Address 
+                const emailTo = "tellme@1823.gov.hk";
+ 
                 
                 // Old Subject line format:
 // const subjectText = "Dangerous parking at " + currentDateTime;
