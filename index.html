@@ -103,14 +103,12 @@
     <h4>Safer streets, one data point at a time</h4>
     
      <!-- Explanation container card - Data-focused & professional -->
-    <div style="background-color: #ebf8ff; border-left: 4px solid #3182ce; padding: 15px; margin: 20px auto 30px auto; text-align: left; border-radius: 0 6px 6px 0;">
-        <p style="margin: 0; font-size: 15px; color: #2b6cb0; line-height: 1.6;">
-            "Streets and their sidewalks, the main public places of a city, are its most vital organs. Think of a city and what comes to mind? Its streets. If a city's streets look interesting, the city looks interesting; if they look dull, the city looks dull. If they look dangerous, they are dangerous."
-— Jane Jacobs, The Death and Life of Great American Cities
-        </p>
-    
-        
-    </div>
+    <div style="background-color: #ebf8ff; border-left: 4px solid #3182ce; padding: 15px; margin-bottom: 25px; border-radius: 0 6px 6px 0;">
+    <p id="quoteText" style="margin: 0 0 8px 0; font-size: 14px; font-style: italic; color: #2b6cb0; line-height: 1.5;"></p>
+    <p id="quoteAuthor" style="margin: 0; font-size: 13px; font-weight: bold; color: #2c5282; text-align: right;"></p>
+</div>
+
+
 
 
         <!-- Updated Selection Dropdown with explicit placeholder -->
@@ -216,6 +214,30 @@ bodyText += "Please transfer this data package to the appropriate enforcement or
         }
     );
 }
+
+const quotes = [
+    { text: "Streets and their sidewalks, the main public places of a city, are its most vital organs. If they look dangerous, they are dangerous.", author: "Jane Jacobs" },
+    { text: "If you design a city for cars and traffic, you get more cars and traffic. If you design it for people and places, you get more people and places.", author: "Brent Toderian" },
+    { text: "An advanced city is not one where even the poor use cars, but rather one where even the rich use public transport.", author: "Enrique Peñalosa" },
+    { text: "There must be eyes upon the street, eyes belonging to those we might call the natural proprietors of the street.", author: "Jane Jacobs" },
+    { text: "We must look at the world from the point of view of a child, a person in a wheelchair, an old person, and a pedestrian.", author: "Enrique Peñalosa" },
+    { text: "If you treat a sidewalk like an obstacle course for vehicles, you completely destroy the civic life of the street.", author: "Jan Gehl" },
+    { text: "The sidewalk is the absolute bedrock of urban democracy and shared public safety.", author: "Jane Jacobs" },
+    { text: "If we can design a successful city for children, we will have a successful city for everyone.", author: "Gil Penalosa" },
+    { text: "A city that can't manage its curb space is a city that can't manage its future.", author: "Donald Shoup" }
+];
+
+function loadDailyQuote() {
+    const today = new Date().getDate(); // Grabs day of month 1-31
+    const quoteIndex = today % quotes.length; // Automated rotation loop math
+    const dailyQuote = quotes[quoteIndex];
+    
+    document.getElementById("quoteText").innerText = `"${dailyQuote.text}"`;
+    document.getElementById("quoteAuthor").innerText = `— ${dailyQuote.author}`;
+}
+
+// Triggers the text swap the exact millisecond the layout parses
+window.addEventListener('DOMContentLoaded', loadDailyQuote);
 
     </script>
 
