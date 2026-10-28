@@ -1,4 +1,4 @@
-# 🚨 Instant Illegal Parking Reporter
+# 🚨 Instant Civic Issue Reporter
 
 A lightweight, privacy-first, community-driven civic tool designed to make reporting civic issues fast and straightforward.
 
